@@ -23,7 +23,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\EfDbFirst.DataAccess\EfDbFirst.DataAccess.csproj" />
+	  <ProjectReference Include="..\EfDbFirst.Business\EfDbFirst.Business.csproj" />
 	</ItemGroup>
 
 </Project>
