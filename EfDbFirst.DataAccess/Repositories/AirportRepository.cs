@@ -2,19 +2,21 @@
 
 namespace EfDbFirst.DataAccess.Repositories;
 
-internal class AirportRepository : IAirportRepository
+internal class AirportRepository : BaseRepository, IAirportRepository
 {
+    /// <remarks>
+    /// In modern applications, the needed instances are provided by Dependency Injection (DI) system
+    /// </remarks>
+    public AirportRepository(AirlineContext context) : base(context)
+    { }
+
     #region READ
 
-    /// <remarks>
-    /// Please, implement this method!
-    /// </remarks>
-    public Airport? GetByAirportCode(string airportCode) => throw new NotImplementedException();
+    public Airport? GetByAirportCode(string airportCode)
+        => Context.Airports.SingleOrDefault(a => a.AirportCode == airportCode);
 
-    /// <remarks>
-    /// Please, implement this method!
-    /// </remarks>
-    public IReadOnlyList<Airport> GetByCountryCode(string countryCode) => throw new NotImplementedException();
+    public IReadOnlyList<Airport> GetByCountryCode(string countryCode)
+        => Context.Airports.Where(a => a.CountryCode == countryCode).ToList();
 
     /// <remarks>
     /// Please, implement this method!
@@ -30,49 +32,58 @@ internal class AirportRepository : IAirportRepository
     /// 
     /// </remarks>
     public IReadOnlyList<Airport> GetBySquareArea(double northWestLongitude, double northWestLatitude, double southEastLongitude, double southEastLatitude)
-        => throw new NotImplementedException();
+        => Context.Airports.Where(a => a.Longitude >= northWestLongitude && a.Longitude <= southEastLongitude &&
+                                        a.Latitude >= northWestLatitude && a.Latitude <= southEastLatitude)
+                            .ToList();
 
     #endregion
 
     #region CREATE
 
-    /// <remarks>
-    /// Please, implement this method!
-    /// </remarks>
     /// <returns>Number of affected rows</returns>
-    public int Add(Airport airport) => throw new NotImplementedException();
+    public int Add(Airport airport)
+    {
+        Context.Airports.Add(airport);
+        return Context.SaveChanges();
+    }
 
-    /// <remarks>
-    /// Please, implement this method!
-    /// </remarks>
     /// <returns>Number of affected rows</returns>
-    public int AddRange(IReadOnlyList<Airport> airports) => throw new NotImplementedException();
+    public int AddRange(IReadOnlyList<Airport> airports)
+    {
+        Context.Airports.AddRange(airports);
+        return Context.SaveChanges();
+    }
 
     #endregion
 
     #region UPDATE
 
-    /// <remarks>
-    /// Please, implement this method!
-    /// </remarks>
     /// <returns>Number of affected rows</returns>
-    public int Update(Airport airport) => throw new NotImplementedException();
+    public int Update(Airport airport)
+    {
+        Context.Airports.Update(airport);
+        return Context.SaveChanges();
+    }
 
     #endregion
 
     #region DELETE
 
-    /// <remarks>
-    /// Please, implement this method!
-    /// </remarks>
     /// <returns>Number of affected rows</returns>
-    public int DeleteByAirportCode(string airportCode) => throw new NotImplementedException();
+    public int DeleteByAirportCode(string airportCode)
+    {
+        Airport airport = Context.Airports.Single(a => a.AirportCode == airportCode);
+        Context.Airports.Remove(airport);
+        return Context.SaveChanges();
+    }
 
-    /// <remarks>
-    /// Please, implement this method!
-    /// </remarks>
     /// <returns>Number of affected rows</returns>
-    public int DeleteByCountryCode(string countryCode) => throw new NotImplementedException();
+    public int DeleteByCountryCode(string countryCode)
+    {
+        IEnumerable<Airport> airports = Context.Airports.Where(a => a.CountryCode == countryCode);
+        Context.Airports.RemoveRange(airports);
+        return Context.SaveChanges();
+    }
 
     #endregion
 }

@@ -1,6 +1,8 @@
+using EfDbFirst.DataAccess;
 using EfDbFirst.DataAccess.Models;
 using EfDbFirst.DataAccess.Repositories;
 using EfDbFirst.Tests.Locals;
+using Microsoft.EntityFrameworkCore;
 
 namespace EfDbFirst.Tests;
 
@@ -12,11 +14,13 @@ namespace EfDbFirst.Tests;
 [TestCaseOrderer("EfDbFirst.Tests.Locals.TestsOrderer", "EfDbFirst.Tests")]
 public sealed class Exercise1
 {
+    private readonly AirlineContext _context;
     private readonly AirportRepository _airportRepository;
 
     public Exercise1()
     {
-        _airportRepository = new AirportRepository();
+        _context = new(new DbContextOptions<AirlineContext>());
+        _airportRepository = new AirportRepository(_context);
     }
 
     #region 1. READ
