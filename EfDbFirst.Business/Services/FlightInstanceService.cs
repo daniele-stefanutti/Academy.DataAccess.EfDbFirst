@@ -1,6 +1,7 @@
 ﻿using EfDbFirst.Business.Dtos;
 using EfDbFirst.Business.Exceptions;
 using EfDbFirst.Business.Mappers;
+using EfDbFirst.Business.Utilities;
 using EfDbFirst.DataAccess.Models;
 using EfDbFirst.DataAccess.Repositories;
 
@@ -149,7 +150,7 @@ internal sealed class FlightInstanceService : BaseService, IFlightInstanceServic
 
     private static PilotDto GetPilotDto(Pilot pilot)
     {
-        int age = (int)Math.Floor((DateTime.Now - pilot.Dob).TotalDays / 365);
+        int age = DateTimeUtility.GetAge(pilot.Dob);
         return PilotMapper.Map(pilot, age);
     }
 

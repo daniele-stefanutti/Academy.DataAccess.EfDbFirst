@@ -8,4 +8,5 @@ public interface IFlightInstanceRepository : IBaseRepository<FlightInstance>
     Task<IReadOnlyList<FlightInstance>> GetWithinDateTimeLeaveRangeAsync(DateTime startDateTimeLeave, DateTime endDateTimeLeave);
     Task<IReadOnlyList<FlightInstance>> GetByPlaneManufacturerNameAsync(string planeManufacturerName);
     Task<IReadOnlyList<FlightInstance>> GetByFlightArriveFromAirportCodeAsync(string airportCode);
+    Task<IReadOnlyList<FlightInstance>> GetByPlaneRegistrationNoAsync(string RegistrationNo);
 }

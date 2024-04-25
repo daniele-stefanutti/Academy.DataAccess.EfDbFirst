@@ -22,7 +22,9 @@ public sealed class Exercise3
         _context = new(new DbContextOptions<AirlineContext>());
         _statisticsService = new
         (
-            // Add needed repositiories instances here
+            new PlaneDetailRepository(_context),
+            new FlightInstanceRepository(_context),
+            new FlightAttendantRepository(_context)
         );
     }
 

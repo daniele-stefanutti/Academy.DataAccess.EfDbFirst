@@ -28,6 +28,12 @@ internal class FlightInstanceRepository : BaseRepository<FlightInstance>, IFligh
             .Where(fi => fi.FlightNoNavigation.FlightArriveFrom == airportCode)
             .ToListAsync();
 
+    public async Task<IReadOnlyList<FlightInstance>> GetByPlaneRegistrationNoAsync(string RegistrationNo)
+        => await Context.FlightInstances
+            .Include(fi => fi.FlightNoNavigation)
+            .Where(fi => fi.Plane.RegistrationNo == RegistrationNo)
+            .ToListAsync();
+
     private IQueryable<FlightInstance> GetFlightInstancesIncludingDetails()
         => Context.FlightInstances
             .Include(fi => fi.FlightNoNavigation)
