@@ -2,7 +2,7 @@
 
 namespace EfDbFirst.DataAccess.Repositories;
 
-internal class AirportRepository : BaseRepository, IAirportRepository
+internal class AirportRepository : BaseRepository<Airport>, IAirportRepository
 {
     /// <remarks>
     /// In modern applications, the needed instances are provided by Dependency Injection (DI) system

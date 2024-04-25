@@ -1,8 +1,8 @@
-﻿namespace EfDbFirst.DataAccess.Repositories;
+﻿using EfDbFirst.DataAccess.Models;
 
-public interface IPilotRepository
+namespace EfDbFirst.DataAccess.Repositories;
+
+public interface IPilotRepository : IBaseRepository<Pilot>
 {
-    /// <remarks>
-    /// Please, implement this interface
-    /// </remarks>
+    Task<Pilot?> GetByFirstNameAndLastNameAsync(string firstName, string lastName);
 }

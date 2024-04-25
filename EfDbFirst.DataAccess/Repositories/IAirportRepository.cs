@@ -2,7 +2,7 @@
 
 namespace EfDbFirst.DataAccess.Repositories;
 
-public interface IAirportRepository
+public interface IAirportRepository : IBaseRepository<Airport>
 {
     Airport? GetByAirportCode(string airportCode);
     IReadOnlyList<Airport> GetByCountryCode(string countryCode);

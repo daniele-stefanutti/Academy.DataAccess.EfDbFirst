@@ -1,8 +1,11 @@
-﻿namespace EfDbFirst.DataAccess.Repositories;
+﻿using EfDbFirst.DataAccess.Models;
 
-public interface IFlightInstanceRepository
+namespace EfDbFirst.DataAccess.Repositories;
+
+public interface IFlightInstanceRepository : IBaseRepository<FlightInstance>
 {
-    /// <remarks>
-    /// Please, implement this interface
-    /// </remarks>
+    Task<FlightInstance?> GetByFlightNoAndDateTimeLeaveAsync(string flightNo, DateTime dateTimeLeave);
+    Task<IReadOnlyList<FlightInstance>> GetWithinDateTimeLeaveRangeAsync(DateTime startDateTimeLeave, DateTime endDateTimeLeave);
+    Task<IReadOnlyList<FlightInstance>> GetByPlaneManufacturerNameAsync(string planeManufacturerName);
+    Task<IReadOnlyList<FlightInstance>> GetByFlightArriveFromAirportCodeAsync(string airportCode);
 }

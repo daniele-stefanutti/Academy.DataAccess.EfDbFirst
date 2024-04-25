@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EfDbFirst.DataAccess.Repositories;
 
-internal class FlightRepository : BaseRepository, IFlightRepository
+internal class FlightRepository : BaseRepository<Flight>, IFlightRepository
 {
     public FlightRepository(AirlineContext context) : base(context)
     { }

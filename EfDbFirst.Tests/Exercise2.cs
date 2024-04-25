@@ -27,8 +27,6 @@ public sealed class Exercise2
         _flightInstanceService = new
         (
             new FlightInstanceRepository(_context),
-            new PlaneDetailRepository(_context),
-            new PlaneModelRepository(_context),
             new PilotRepository(_context),
             new FlightAttendantRepository(_context),
             new FlightRepository(_context)

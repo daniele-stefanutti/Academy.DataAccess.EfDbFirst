@@ -1,8 +1,8 @@
-﻿namespace EfDbFirst.DataAccess.Repositories;
+﻿using EfDbFirst.DataAccess.Models;
 
-public interface IFlightAttendantRepository
+namespace EfDbFirst.DataAccess.Repositories;
+
+public interface IFlightAttendantRepository : IBaseRepository<FlightAttendant>
 {
-    /// <remarks>
-    /// Please, implement this interface
-    /// </remarks>
+    Task<bool> IsMentorAsync(int attendantId);
 }
